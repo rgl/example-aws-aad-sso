@@ -1,0 +1,6 @@
+.terraform/
+*.log
+tfplan
+terraform.tfstate*
+secrets.*
+azure-ad-idp-saml-metadata.*
