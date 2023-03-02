@@ -1,5 +1,4 @@
 locals {
-  aws_region            = data.aws_ssoadmin_instances.example.id
   aws_sso_instance_arn  = data.aws_ssoadmin_instances.example.arns[0]
   aws_identity_store_id = data.aws_ssoadmin_instances.example.identity_store_ids[0]
   aws_saml_acs          = "http://localhost/TODO_SEE_README"
