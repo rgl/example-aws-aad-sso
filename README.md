@@ -1,5 +1,7 @@
 # About
 
+[![Lint](https://github.com/rgl/example-aws-aad-sso/actions/workflows/lint.yml/badge.svg)](https://github.com/rgl/example-aws-aad-sso/actions/workflows/lint.yml)
+
 This integrates the AWS IAM Identity Center with the Azure AD as a SSO solution.
 
 This will use [terraform](https://www.terraform.io/) to configure the AWS IAM Identity Center and the Azure AD services as described in the [Tutorial: Azure AD SSO integration with AWS IAM Identity Center](https://learn.microsoft.com/en-us/azure/active-directory/saas-apps/aws-single-sign-on-tutorial).
