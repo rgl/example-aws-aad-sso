@@ -1,9 +1,3 @@
-# NB you can test the relative speed from you browser to a location using https://azurespeedtest.azurewebsites.net/
-# get the available locations with: az account list-locations --output table
-variable "location" {
-  default = "northeurope"
-}
-
 # NB this name must be unique within the Azure subscription.
 #    all the other names must be unique within this resource group.
 variable "prefix" {
