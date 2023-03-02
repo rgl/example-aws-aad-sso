@@ -2,6 +2,7 @@
 #    all the other names must be unique within this resource group.
 variable "prefix" {
   default = "example-aws-aad-sso"
+  type    = string
 }
 
 # see https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/client_config
