@@ -6,6 +6,7 @@ locals {
   aws_access_portal_url = "https://${local.aws_identity_store_id}.awsapps.com/start"
 }
 
+# NB the name of this resource will be displayed as a role (e.g. when running aws configure sso).
 # see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssoadmin_permission_set
 resource "aws_ssoadmin_permission_set" "administrators" {
   instance_arn = local.aws_sso_instance_arn
@@ -13,6 +14,7 @@ resource "aws_ssoadmin_permission_set" "administrators" {
   description  = "Provides administrative access to AWS services and resources."
 }
 
+# NB the name of this resource will be displayed as a role (e.g. when running aws configure sso).
 # see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssoadmin_permission_set
 resource "aws_ssoadmin_permission_set" "readers" {
   instance_arn = local.aws_sso_instance_arn

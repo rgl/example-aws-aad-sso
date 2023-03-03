@@ -47,7 +47,7 @@ az account set --subscription=<tenantId or id>
 az account show
 ```
 
-Login into AWS:
+Configure the AWS CLI to use a Secret Key to access AWS:
 
 ```bash
 # set the account credentials.
@@ -90,7 +90,7 @@ Open the AWS Identity Center page and:
 5. Review and confirm.
 6. Click `Change identity source`.
 
-Show the `AWS access portal URL`:
+Show the `AWS access portal URL` (aka SSO start URL):
 
 ```bash
 terraform output -raw aws_access_portal_url
@@ -103,7 +103,79 @@ terraform output -raw alice_email
 terraform output -raw alice_password
 ```
 
-After you are done testing, you can destroy everything:
+Open a new shell session, and configure the AWS CLI to use a SSO generated
+token to access AWS as `Alice`:
+
+```bash
+aws configure sso
+```
+
+The questions, answers, and output will be something alike:
+
+```plain
+SSO session name (Recommended): cli
+SSO start URL [None]: https://d-0000000000.awsapps.com/start
+SSO region [None]: eu-west-1
+SSO registration scopes [sso:account:access]:
+Attempting to automatically open the SSO authorization page in your default browser.
+If the browser does not open or you wish to use a different device to authorize this request, open the following URL:
+
+https://device.sso.eu-west-1.amazonaws.com/
+
+Then enter the code:
+
+0000-0000
+The only AWS account available to you is: 00000000
+Using the account ID 00000000
+There are 2 roles available to you.
+Using the role name "Readers"
+CLI default client Region [None]:
+CLI default output format [None]:
+CLI profile name [Readers-00000000]: Alice-Readers
+
+To use this profile, specify the profile name using --profile, as shown:
+
+aws s3 ls --profile Alice-Readers
+```
+
+Use the profile, and show the user, user amazon resource name (arn), and the account id:
+
+```
+unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
+export AWS_PROFILE='Alice-Readers'
+aws sts get-caller-identity
+```
+
+This should show something alike:
+
+```json
+{
+    "UserId": "000000000000000000000:example-aws-aad-sso-alice.doe@example.onmicrosoft.c",
+    "Account": "00000000",
+    "Arn": "arn:aws:sts::00000000:assumed-role/AWSReservedSSO_Readers_0000000000000000/example-aws-aad-sso-alice.doe@example.onmicrosoft.c"
+}
+```
+
+After you are done testing as `Alice`, logout, and exit the shell:
+
+```bash
+aws sso logout
+exit
+```
+
+When you later need to login again, you can skip the `aws configure sso` step,
+and use `aws sso login` as:
+
+```bash
+unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
+export AWS_PROFILE='Alice-Readers'
+aws sso login
+aws sts get-caller-identity
+```
+
+After you are done testing, and are ready to destroy everything, return to the
+original shell, the one that is using the `AWS_ACCESS_KEY_ID` and
+`AWS_SECRET_ACCESS_KEY` environment variables, and destroy everything:
 
 ```bash
 make terraform-destroy
@@ -112,3 +184,5 @@ make terraform-destroy
 # References
 
 * [Tutorial: Azure AD SSO integration with AWS IAM Identity Center](https://learn.microsoft.com/en-us/azure/active-directory/saas-apps/aws-single-sign-on-tutorial)
+* [Configuring the AWS CLI to use AWS IAM Identity Center (successor to AWS Single Sign-On)](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html)
+* [Environment variables to configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)

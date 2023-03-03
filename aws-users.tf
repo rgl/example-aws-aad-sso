@@ -43,14 +43,21 @@ resource "aws_identitystore_group" "readers" {
 }
 
 # see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/identitystore_group_membership
-resource "aws_identitystore_group_membership" "alice" {
+resource "aws_identitystore_group_membership" "administrators_alice" {
   identity_store_id = local.aws_identity_store_id
   group_id          = aws_identitystore_group.administrators.group_id
   member_id         = aws_identitystore_user.alice.user_id
 }
 
 # see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/identitystore_group_membership
-resource "aws_identitystore_group_membership" "bob" {
+resource "aws_identitystore_group_membership" "readers_alice" {
+  identity_store_id = local.aws_identity_store_id
+  group_id          = aws_identitystore_group.readers.group_id
+  member_id         = aws_identitystore_user.alice.user_id
+}
+
+# see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/identitystore_group_membership
+resource "aws_identitystore_group_membership" "readers_bob" {
   identity_store_id = local.aws_identity_store_id
   group_id          = aws_identitystore_group.readers.group_id
   member_id         = aws_identitystore_user.bob.user_id
