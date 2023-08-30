@@ -1,12 +1,12 @@
 # see https://github.com/hashicorp/terraform
 terraform {
-  required_version = "1.3.9"
+  required_version = "1.5.6"
   required_providers {
     # see https://github.com/hashicorp/terraform-provider-random
     # see https://registry.terraform.io/providers/hashicorp/random
     random = {
       source  = "hashicorp/random"
-      version = "3.4.3"
+      version = "3.5.1"
     }
     # see https://github.com/hashicorp/terraform-provider-time
     # see https://registry.terraform.io/providers/hashicorp/time
@@ -18,13 +18,13 @@ terraform {
     # see https://registry.terraform.io/providers/hashicorp/azuread
     azuread = {
       source  = "hashicorp/azuread"
-      version = "2.35.0"
+      version = "2.41.0"
     }
     # see https://github.com/hashicorp/terraform-provider-aws
     # see https://registry.terraform.io/providers/hashicorp/aws
     aws = {
       source  = "hashicorp/aws"
-      version = "4.56.0"
+      version = "5.14.0"
     }
     # see https://github.com/rgl/terraform-provider-saml
     # see https://registry.terraform.io/providers/rgl/saml

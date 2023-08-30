@@ -5,14 +5,14 @@ default:
 
 fmt:
   image:
-    name: hashicorp/terraform:1.3.9
+    name: hashicorp/terraform:1.5.6
     entrypoint: [""]
   script:
     - terraform fmt -check -diff
 
 lint:
   image:
-    name: ghcr.io/terraform-linters/tflint-bundle:v0.45.0.0
+    name: ghcr.io/terraform-linters/tflint-bundle:v0.47.0.0
     entrypoint: [""]
   script:
     - tflint --init
