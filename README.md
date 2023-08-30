@@ -38,6 +38,8 @@ Login into Azure:
 az login --allow-no-subscriptions
 ```
 
+**NB** If you are using the Free Microsoft 365 E5 instant sandbox, you should login as its administrator.
+
 Ensure the expected account is set as default:
 
 ```bash
