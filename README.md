@@ -79,18 +79,23 @@ make terraform-apply
 
 Open the AWS Identity Center page and:
 
-1. Change the identity source to `External service provider`.
-2. Under the `Service provider metadata` section:
+1. Go to the `Dashboard` page.
+2. Change the identity source to `External service provider`:
+   1. Click the `Choose your identity source` link.
+   2. Under the `Identity source` tab, click the `Actions` button, and choose `Change identity source`.
+   3. Click `External service provider`.
+   4. Click the `Next` button.
+3. Under the `Service provider metadata` section:
    1. Copy the `IAM Identity Center Assertion Consumer Service (ACS) URL` and paste it into the `aws_saml_acs` variable value inside the `aws-permissions.tf` file.
    2. Copy the `IAM Identity Center issuer URL` and paste it into the `aws_saml_entity_id` variable value inside the `aws-permissions.tf` file.
    3. Execute `make terraform-plan` and review the plan.
    4. Execute `make terraform-apply` and wait for it to finish.
    5. Execute `terraform output -raw saml_metadata_document >azure-ad-idp-saml-metadata.xml`
-3. Under the `Identity provider metadata`, `IdP SAML metadata` section:
+4. Under the `Identity provider metadata`, `IdP SAML metadata` section:
    1. Click the `Choose file` button, and upload the `azure-ad-idp-saml-metadata.xml` file created in the previous step.
-4. Click `Next`.
-5. Review and confirm.
-6. Click `Change identity source`.
+5. Click `Next`.
+6. Review and confirm.
+7. Click `Change identity source`.
 
 Show the `AWS access portal URL` (aka SSO start URL):
 
